@@ -1,12 +1,14 @@
 var bot;
 var Idletopia = require('./idletopia');
 bot = new Idletopia({
-	server: 'irc.utonet.org',
-	nickname: 'Idletopia',
-	channel: '#asdfjfasdfdas',
+	server: process.env.SERVER,
+	nickname: process.env.NICKNAME,
+	channel: process.env.CHANNEL,
 });
 
 bot.on( 'connect', function() {
+	bot.client.say( 'NickServ', 'IDENTIFY ' + process.env.NSPASSWORD );
+	bot.client.send( 'MODE', process.env.NICKNAME, '+B' ); 
 });
 
 
