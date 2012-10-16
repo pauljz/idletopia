@@ -1,0 +1,15 @@
+!!! 5
+html
+	head
+		if typeof title !== 'undefined'
+			title #{title} - Idletopia
+		else
+			title Idletopia
+		link(href='/css/bootstrap.min.css',rel='stylesheet')
+		style
+			.onlinefalse {
+				color:#999;
+			}
+	body
+		section.container(role='main')
+			block mainContent

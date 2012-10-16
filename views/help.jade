@@ -1,0 +1,129 @@
+extends layout
+
+block mainContent
+	h1 Idletopia Help
+
+	include menu.jade
+
+
+	:markdown
+		Premise
+		-------
+
+		Idletopia is a variant of [IdleRPG](http://idlerpg.net/) written
+		with themes from the web game [Utopia](http://utopia-game.com).
+		If you are familiar with IdleRPG, you'll already know most of the concepts
+		of Idletopia. In fact, it uses most of the same rules.
+		If you're new to the idle game concept, the point of the game is to idle
+		on IRC. You advance in the game by idling. You are penalised for talking
+		in the game channel, changing your nickname, quitting, parting, and generally
+		taking *any* visible action in the channel.
+
+		The main way that Idletopia differs from IdleRPG is that rather than earning
+		levels as you idle, you earn acres. Early on you will earn an acre every few
+		seconds; as you grow, you'll earn acres more and more slowly.
+
+		One hundred acres in Idletopia are equivalent to 1 level in IdleRPG.
+
+		True to Utopia, attacking is a big part of the game.  As you grow, your armies will
+		be more likely to attack another province; eventually your armies will attack every 4-8 hours.
+		All of Idletopia's "random factor" comes from attacking.
+
+		Commands
+		-----
+
+		#### Registration
+		To register with the bot, issue the register command in a private message:
+
+		> /msg Idletopia register _username_ _password_ _race_
+
+		* Username and Password can only be one word!
+		* The username is what you will log in with, and what your name will display as
+		in the channel. Typically you would use your IRC nickname.
+		* Your password is used to log in later if you disconnect.
+		* Your race is just-for-fun. It can be anything you want.
+
+		#### Logging In and Out
+
+		> /msg Idletopia login _username_ _password_
+
+		> /msg Idletopia logout
+
+
+		These are mostly self-explanatory. Logging out *will* penalize you, but
+		not as badly as parting the channel.
+
+		Logging in is necessary since you only gain acres when you're logged in.
+
+		#### Changing your password
+		
+		If you accidentally paste your password in the channel or something, you should use this command.
+
+		> /msg Idletopia newpass *new-password-here*
+
+		#### Quitting
+
+		If you're not man enough for the cut-throat world of Idletopia, you can delete yourself.
+
+		> /msg Idletopia removeme
+
+		Equations
+		---------
+
+		This is an overview of the mathematics that defines the game.
+
+		#### Gaining land
+
+		You start the game with 200 acres.
+		
+		<dl>
+		<dt> &le; 6000 acres</dt>
+		<dd>6 &times; 1.16 <sup>acres / 100</sup> seconds per acre</dd>
+		<dt>&gt; 6000 acres</dt>
+		<dd>6 &times; 1.16 <sup>6000 / 100</sup> + 86400 &times; ( acres &div; 100 - 60 ) seconds per acre</dd>
+		</dl>
+
+		#### Penalties
+
+		<dl>
+		<dt>Changing your nickname:</dt>
+		<dd>30 &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		<dt>Parting the channel:</dt>
+		<dd>200 &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		<dt>Quitting IRC or disconnecting:</dt>
+		<dd>20 &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		<dt>Logging out:</dt>
+		<dd>20 &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		<dt>Getting kicked:</dt>
+		<dd>250 &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		<dt>Talking in the channel:</dt>
+		<dd>(message length) &times; 1.14 <sup>acres &div; 100</sup> seconds</dd>
+		</dl>
+
+		#### Attacking
+
+		* You gain 3-5 offensive and defensive specialists per acre gained from idling.
+		* You lose 3-5 offensive and defensive specialists per acre lost from penalties.
+		* You gain/lose no elites from 0-1000 acres; 1-5 per acre from 1000-2000; 2-5 per acre from 2000 on.
+		* You neither gain nor lose troops from attacking, nor from being attacked.
+		* Specialists attack and defend for 4 points, respectively.
+		* Elites attack *and* defend for 5 points.
+		* However, elites don't defend if your armies are out.
+		* The winner of an attack is determined by generating random numbers between 0 and your offense, and between 0 and your target's defense. Whoever has the highest random number wins.
+		* Attack time is randomly between 4 and 8 hours.
+		* Attack gains are determined based off the target's acres: acres &div; 100.  You will always gain at least 16 acres though.
+		* Under 500 acres, you have a ~10% chance of attacking per day.
+		* Between 500 and 1000 acres, you have a ~25% chance of attacking per day.
+		* Between 1000 and 1500 acres, you have a ~50% chance of attacking per day.
+		* Between 1500 and 2500 acres, you have a ~75% chance of attacking per day.
+		* Once you're over 2500 acres you will attack almost immediately when your armies return home. 
+
+		Kingdoms
+		--------
+
+		You may have noticed that you are assigned a kingdom when you join.
+		Kingdoms don't do much of anything yet; however, (unlike in Utopia) you will never attack your kingdom-mates.
+		They are your randomly assigned team.
+
+		Eventually I may introduce the concept of war, during which time
+		you will exclusively attack the kingdom with whom you are at war.

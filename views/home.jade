@@ -1,0 +1,44 @@
+extends layout
+
+block mainContent
+	h1 Idletopia
+
+	include menu.jade
+
+	table.table.table-bordered
+		thead
+			tr
+				th User
+				th Race
+				th
+					span.pull-right Acres
+				th
+					span.pull-right Army
+				th
+					span.pull-right Off Specs
+				th
+					span.pull-right Def Specs
+				th
+					span.pull-right Elites
+		tbody
+			each kingdom in kingdomAcres
+				tr.info
+					td(colspan=2)
+						strong The Kingdom of (#{kingdom[0].kingdom})
+					td
+						strong.pull-right= kingdom.acres
+					td(colspan=4)
+				each user in kingdom
+					tr(class='online'+user.online)
+						td= user.username
+						td= user.charRace
+						td
+							span.pull-right= user.acres
+						td
+							span.pull-right= Math.floor(user.army/60/60*100)/100 || '-'
+						td
+							span.pull-right= user.troops.offspecs
+						td
+							span.pull-right= user.troops.defspecs
+						td
+							span.pull-right= user.troops.elites
