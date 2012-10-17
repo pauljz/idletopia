@@ -119,7 +119,8 @@ IdleUser.prototype.applyPenalty = function( bot, reason, penalty ) {
 
 	this.target = bot.rules.levelTarget(this);
 
-	bot.say( this.getInfoLine() + ', just lost ' + penalty + ' seconds and ' + acresLost + ' acres for: ' + reason );
+	//bot.say( this.getInfoLine() + ', just lost ' + penalty + ' seconds and ' + acresLost + ' acres for: ' + reason );
+	console.log( this.getInfoLine() + ', just lost ' + penalty + ' seconds and ' + acresLost + ' acres for: ' + reason );
 };
 
 IdleUser.prototype.changeNick = function( newnick ) {
