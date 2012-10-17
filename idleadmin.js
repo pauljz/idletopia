@@ -64,7 +64,7 @@ IdleAdmin.prototype.login = function( nick, text, message ) {
 	for ( var i in this.bot.users ) {
 		user = this.bot.users[i];
 		if ( user.username === username ) {
-			if ( user.hashPassword( password ) === this.bot.users[nick].password ) {
+			if ( user.hashPassword( password ) === user.password ) {
 
 				user.online = true;
 				user.loggedOut = false;
