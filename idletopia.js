@@ -284,10 +284,15 @@ Idletopia.prototype.runRule = function( rule, nick, message ) {
 }
 
 Idletopia.prototype.logout = function(nick) {
-	this.users[nick].logout();
+	if ( this.checkUser(nick) ) {
+		this.users[nick].logout();
+	}
 };
 
 Idletopia.prototype.changeNick = function( oldnick, newnick ) {
+	if ( !this.checkUser(oldnick) ) {
+		return;
+	}
 	this.users[newnick] = this.users[oldnick];
 	delete this.users[oldnick];
 	this.users[newnick].changeNick( newnick );
